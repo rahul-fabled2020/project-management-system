@@ -1,0 +1,34 @@
+.form {
+  border: 3px solid rgba($color: $blue-bayoux, $alpha: 0.7);
+  background-color: rgba($color: $catskill-white, $alpha: 0.7);
+  padding: 12px 20px;
+
+  @include e(input) {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  @include e(textarea) {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    min-height: 100px;
+  }
+
+  @include e(btn) {
+    background-color: $blue-bayoux;
+    color: $white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    width: 100%;
+  }
+
+  @include e(footer) {
+    float: right;
+  }
+}

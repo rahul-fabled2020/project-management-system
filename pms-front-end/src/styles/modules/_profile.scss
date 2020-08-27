@@ -1,0 +1,92 @@
+.profile {
+  background-color: $white;
+  border-radius: 16px;
+  padding: 16px;
+
+  @include e(image) {
+    border-radius: 16px;
+
+    @include themify(theme-type(color)){
+      filter: theme-property(image-brightness);
+    }
+  }
+
+  @include e(image-wrapper) {
+    margin-bottom: 16px;
+  }
+  @include e(user) {
+    margin-bottom: 16px;
+  }
+
+  @include e(bio) {
+    margin-bottom: 16px;
+  }
+
+  @include e(info) {
+    color: #555;
+    font-size: 14px;
+
+    @include themify(theme-type(color)){
+      color: theme-property(secondary-font);
+    }
+  }
+
+  @include e(location) {
+    margin-top: 16px;
+    margin-bottom: 4px;
+  }
+
+  @include e(name) {
+    margin-bottom: 8px;
+  }
+
+  @include e(user-name) {
+    color: #555;
+
+    @include themify(theme-type(color)){
+      color: theme-property(secondary-font);
+    }
+  }
+
+  @include e(follow-text) {
+    margin-right: 8px;
+
+    &::after {
+      content: "";
+      margin-left: 4px;
+      height: 4px;
+      width: 4px;
+      background-color: $black;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+
+      @include themify(theme-type(color)){
+        background-color: theme-property(primary-font);
+      }
+    }
+  }
+
+  @include e(link) {
+    color: #555;
+    @include hover {
+      color: darken($color: #555, $amount: 30%);
+    }
+
+    @include themify(theme-type(color)){
+      color: theme-property(secondary-font);
+
+      @include hover {
+        color: theme-property(primary-font);
+      }
+    }
+  }
+
+  @include themify(theme-type(color)){
+    background: theme-property(box-bg);
+  }
+
+  @include themify(theme-type(color)){
+    color: theme-property(primary-font);
+  }
+}

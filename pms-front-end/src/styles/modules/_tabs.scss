@@ -1,0 +1,27 @@
+.tabs {
+  @include e(list) {
+    border-bottom: 1px solid #ccc;
+    padding-left: 0;
+    text-align: center;
+
+    @include m(active) {
+      background-color: $athens-gray;
+      border: solid #ccc;
+      border-width: 1px 1px 0 1px;
+    }
+  }
+
+  @include e(list-item) {
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 3rem;
+  }
+
+  @include e(content) {
+    min-height: 80vh;
+    padding: 10px 20px;
+  }
+}

@@ -1,0 +1,13 @@
+.bar {
+  background-color: $white;
+  border-radius: 16px;
+  color: #777;
+  font-weight: bold;
+  padding: 16px;
+  margin-bottom: 8px;
+
+  @include themify(theme-type(color)){
+    color: theme-property(tertiary-font);
+    background-color: theme-property(box-bg);
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "project-management-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && babel src --copy-files --out-dir dist --source-maps",
+    "lint": "eslint src test",
+    "lint:fix": "eslint src test --fix",
+    "prettier": "prettier --write **/*.{js,json,yml,yaml,md}",
+    "start": "nodemon --watch .env --watch src --exec babel-node src --source-maps",
+    "migrate": "babel-node src/database/migrations/migrate.js --source-maps",
+    "seed": "babel-node src/database/seeds/seed.js --source-maps",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rahul Sharma <rahul.fabled@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-status-codes": "^1.4.0",
+    "joi": "^17.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "pg": "^8.3.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "eslint": "^7.6.0",
+    "eslint-config-leapfrog": "^3.0.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2"
+  },
+  "engines": {
+    "node": "12.18.2",
+    "npm": "6.14.5"
+  }
+}

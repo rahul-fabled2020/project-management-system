@@ -1,0 +1,39 @@
+.button {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 8px;
+    color: #555;
+    cursor: pointer;
+
+    @include m(primary) {
+        border: 1px solid #555;
+        color: #555;
+        background: $white;
+
+        @include hover {
+            color: $white;
+            background-color: #555;
+        }
+
+        @include themify(theme-type(color)){
+            color: theme-property(secondary-font);
+            background-color: theme-property(main-bg);
+
+            @include hover {
+                color: theme-property(main-bg);
+                background-color: theme-property(secondary-font);
+            }
+          }
+    }
+
+    @include m(secondary) {
+        background: $error;
+        color: $white;
+
+        @include hover {
+            background-color: darken($color: $error, $amount: 10%);
+            color: $athens-gray;
+        }
+    }
+}

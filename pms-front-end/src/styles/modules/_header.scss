@@ -1,0 +1,40 @@
+.header {
+  background-color: $blue-bayoux;
+  color: $white;
+  padding: 32px 0;
+
+  @include e(heading) {
+    float: left;
+  }
+
+  @include e(link) {
+    color: inherit;
+
+    &:visited, &:active {
+      color: inherit;
+    }
+  }
+
+  @include e(user-wrapper) {
+    float: right;
+  }
+
+  @include e(user-info) {
+    display: inline-block;
+    margin-right: 8px;
+  }
+
+  @include e(user-role) {
+    text-align: right;
+  }
+
+  @include e(button) {
+    display: inline-block;
+    float: right;
+  }
+
+  @include themify(theme-type(color)){
+    color: theme-property(tertiary-font);
+    background-color: theme-property(box-bg);
+  }
+}

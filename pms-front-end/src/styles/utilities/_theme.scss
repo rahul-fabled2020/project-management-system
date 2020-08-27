@@ -1,0 +1,75 @@
+$themes: (
+  color: (
+    dark: (
+      body: #000000,
+      image-brightness: brightness(80%),
+      header-bg: #121212,
+      header-font: #FFFFFF,
+      main-bg: #000000,
+      heading: #534D56,
+      box-bg: lighten(#000, 30%),
+      primary-font: #ffffff,
+      secondary-font: darken(#fff, 20%),
+      tertiary-font: darken(#fff, 10%),
+      footer-bg: #1B998B,
+      error-bg: #cf6679,
+      error: #000,
+    )
+  ),
+  size: (
+    cozy: (
+      headerHeadingFont: 32px,
+      headerSubheadingFont: 14px,
+      headerParagraphFont: 16px,
+      headerPadding: 20px 0,
+      componentHeadingFont: 18px,
+      componentSubheadingFont: 16px,
+      componentParagraphFont: 12px,
+      componentPadding: 15px 0,
+      blockSegmentPadding: 8px 0,
+      dottedMarginTop: 20px,
+      preComponentFont: 12px,
+      selectPadding: 6px 8px,
+      selectFontSize: 12px
+  	),
+  	comfortable: (
+      headerHeadingFont: 46px,
+      headerSubheadingFont: 16px,
+      headerParagraphFont: 18px,
+      headerPadding: 40px 0,
+      componentHeadingFont: 22px,
+      componentSubheadingFont: 18px,
+      componentParagraphFont: 16px,
+      componentPadding: 30px 0,
+      blockSegmentPadding: 20px 0,
+      dottedMarginTop: 30px,
+      preComponentFont: 14px,
+      selectPadding: 8px 16px,
+      selectFontSize: 14px
+  	)
+  )
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $value in $map {
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+
+  }
+}
+
+@function theme-property($key) {
+  @return map-get($theme-map, $key);
+}
+
+@function theme-type($type){
+  @return map-get($themes, $type);
+}

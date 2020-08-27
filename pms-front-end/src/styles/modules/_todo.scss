@@ -1,0 +1,23 @@
+.todo {
+  @include e(form) {
+    max-width: 600px;
+    margin: 15px auto;
+  }
+
+  @include e(heading) {
+    margin-bottom: 15px;
+  }
+
+  @include e(item) {
+    cursor: pointer;
+  }
+
+  @include e(empty-message) {
+    margin: 15px 0;
+    text-align: center;
+  }
+}
+
+.line-through {
+  text-decoration: line-through;
+}

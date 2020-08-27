@@ -1,0 +1,30 @@
+.dashboard {
+  @include e(row) {
+    margin: 0;
+  }
+
+  @include e(col) {
+    padding: 0;
+  }
+
+  @include e(sidebar) {
+    min-height: 100vh !important;
+    width: 100vw;
+    margin-left: -1rem;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+
+    .sidebar-heading {
+      padding: 0.875rem 1.25rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  @include e(content) {
+    background-color: $athens-gray;
+    min-height: 100vh;
+    margin-left: 250px;
+  }
+}

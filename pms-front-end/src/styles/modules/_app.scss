@@ -1,0 +1,29 @@
+.app {
+  
+  a {
+    text-decoration: none;
+  }
+
+  @include e(container) {
+    padding: 16px;
+  }
+
+  @include e(col) {
+    margin-bottom: 32px;
+  }
+
+  @include e(loading) {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 8px;
+    text-align: center;
+
+    @include themify(theme-type(color)){
+      color: theme-property(primary-font);
+    }
+  }
+
+  @include themify(theme-type(color)){
+    background: theme-property(main-bg);
+  }
+}
