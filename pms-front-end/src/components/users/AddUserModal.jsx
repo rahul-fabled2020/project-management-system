@@ -45,7 +45,7 @@ class AddUserModal extends Component {
     const roleTitle = roleDom.options.item(roleDom.selectedIndex).text;
     
     error = this.validatePassword(password, confirmPassword);
-    console.log({ roleIds: [role] });
+    
     if (error) {
       this.setState(() => ({ error }));
     } else {

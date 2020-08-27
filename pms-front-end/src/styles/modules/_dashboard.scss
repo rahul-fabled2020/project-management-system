@@ -3,8 +3,27 @@
     background-color: #fff;
   }
 
-  @include e(nav) {
-    margin: 15px 0;
+  @include e(add-btn) {
+    float: right;
+    font-size: 24px;
+    padding: 5px;
+    border: 0;
+    background-color: transparent;
+    margin-right: 15px;
+  }
+
+  @include e(nav-bar) {
+    margin-bottom: 15px;
+  }
+
+  @include e(table-links) {
+    padding: 5px;
+    color: darkblue;
+    cursor: pointer;
+
+    @include hover {
+      color: blue;
+    }
   }
 
   @include e(row) {

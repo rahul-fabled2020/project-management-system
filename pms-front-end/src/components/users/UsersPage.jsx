@@ -15,32 +15,41 @@ import * as apiActions from '../../redux/actions/apiActions';
 class UsersPage extends Component {
   state = { error: '', showModal: false };
 
+  onDelete = (id) => {
+    if (window.confirm('Are you sure to delete?')) {
+      alert(id);
+    }
+  };
+
   componentDidMount() {
     this.props.storeUsers([]);
     const token = CookieManager.getCookie('token');
 
-    http.get('/users', token).then((res) => {
-      const users = res.data;
+    http
+      .get('/users', token)
+      .then((res) => {
+        const users = res.data;
 
-      if (users) {
-        users.sort((a, b) => a.id > b.id ? -1: 1 );
-        this.props.storeUsers(users);
-      }
+        if (users) {
+          users.sort((a, b) => (a.id > b.id ? -1 : 1));
+          this.props.storeUsers(users);
+        }
 
-      if (res.error) {
-        this.setState(() => ({ error: handleError(res.error) }));
-      }
-    }).catch(err => this.setState({error: handleError(err)}));
+        if (res.error) {
+          this.setState(() => ({ error: handleError(res.error) }));
+        }
+      })
+      .catch((err) => this.setState({ error: handleError(err) }));
   }
 
   render() {
     const { showModal } = this.state;
     const { users } = this.props;
-    
+
     return (
       <div className="container">
         <Error message={this.state.error} />
-        <nav aria-label="breadcrumb dashboard__nav">
+        <nav aria-label="breadcrumb" className="dashboard__nav-bar">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
               <NavLink to="/" activeClassName="active" exact={true}>
@@ -53,10 +62,13 @@ class UsersPage extends Component {
               </NavLink>
             </li>
           </ol>
-          <button style={{ float: 'right' }} onClick={() => this.setState(() => ({ showModal: true }))}>
+        </nav>
+
+        <div className="dasboard__add-btn-wrapper">
+          <button className="dashboard__add-btn" onClick={() => this.setState(() => ({ showModal: true }))} title="Add">
             <i className="fas fa-plus-circle"></i>
           </button>
-        </nav>
+        </div>
 
         <Table responsive className="dashboard__table">
           <thead>
@@ -83,15 +95,15 @@ class UsersPage extends Component {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
-                  <Link to={`/users/${user.id}`}>
+                  <Link to={`/users/${user.id}`} className="dashboard__table-links" title="View">
                     <i className="fas fa-eye"></i>
                   </Link>
-                  <Link to={`/users/${user.id}/edit`}>
+                  <Link to={`/users/${user.id}/edit`} className="dashboard__table-links" title="Edit">
                     <i className="fas fa-edit"></i>
                   </Link>
-                  <Link to={`/users/${user.id}`}>
+                  <span className="dashboard__table-links" onClick={(e) => this.onDelete(user.id)} title="Delete">
                     <i className="fas fa-trash-alt"></i>
-                  </Link>
+                  </span>
                 </td>
               </tr>
             ))}
@@ -106,11 +118,11 @@ class UsersPage extends Component {
 }
 
 function mapStateToProps(state) {
-  return {users: state.api.users};
+  return { users: state.api.users };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {storeUsers: (users) => dispatch(apiActions.storeUsers(users)) };
+  return { storeUsers: (users) => dispatch(apiActions.storeUsers(users)) };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAuth(UsersPage));
