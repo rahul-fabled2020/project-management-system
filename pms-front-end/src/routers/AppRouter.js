@@ -5,7 +5,8 @@ import App from '../App';
 import LoginPage from '../components/LoginPage';
 import withDashboard from '../hoc/withDashboard';
 import UsersPage from '../components/users/UsersPage';
-
+import User from '../components/users/User';
+import EditUser from '../components/users/EditUser';
 
 const DefaultPage = () => (
   <div>404 Not Found</div>
@@ -17,7 +18,9 @@ const AppRouter = () => (
       <Switch>
         <Route path="/" component={withDashboard(App)} exact={true} />
         <Route path="/login" component={LoginPage} />
-        <Route path="/users" component={ withDashboard(UsersPage)} />
+        <Route path="/users" component={ withDashboard(UsersPage)} exact={true} />
+        <Route path="/users/:id" component= {withDashboard(User)} exact={true} />
+        <Route path="/users/:id/edit" component={withDashboard(EditUser)} />
         <Route path="/projects" component={withDashboard(DefaultPage)} />
         <Route path="/tasks" component={withDashboard(DefaultPage)} />
         <Route component={withDashboard(DefaultPage)} />

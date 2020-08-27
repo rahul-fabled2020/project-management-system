@@ -11,13 +11,18 @@ function get(url, token) {
 function post(url, data, token) {
   return fetch(`${BASE_URL}${url}`, {
     method: 'POST',
-    cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token
+      Authorization: token
     },
     body: JSON.stringify(data)
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.status === 204 || res.code === 204) {
+      return {};
+    }
+
+    return res.json();
+  });
 }
 
 function put(url, data, token) {
@@ -40,7 +45,7 @@ function destroy(url, token) {
       'Content-Type': 'application/json',
       Authorization: token
     }
-  }).then((res) => res.json());
+  });
 }
 
 export default { get, post, put, destroy };

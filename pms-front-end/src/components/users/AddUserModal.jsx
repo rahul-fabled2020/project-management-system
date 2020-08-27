@@ -27,7 +27,7 @@ class AddUserModal extends Component {
     return error;
   };
 
-  addUser = (e) => {
+  registerUser = (e) => {
     e.preventDefault();
 
     const token = CookieManager.getCookie('token');
@@ -39,10 +39,13 @@ class AddUserModal extends Component {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
-    const role = parseInt(document.getElementById('role').value);
-
+    
+    const roleDom = document.getElementById('role');
+    const role = parseInt(roleDom.value);
+    const roleTitle = roleDom.options.item(roleDom.selectedIndex).text;
+    
     error = this.validatePassword(password, confirmPassword);
-
+    console.log({ roleIds: [role] });
     if (error) {
       this.setState(() => ({ error }));
     } else {
@@ -55,11 +58,20 @@ class AddUserModal extends Component {
             const error = handleError(res.error);
             this.setState(() => ({ error }));
           } else {
-            this.props.addUser(user);
-            form.reset();
+            this.props.addUser({...user, role: roleTitle});
+
             http
               .post(`/users/${user.id}/roles`, { roleIds: [role] }, token)
-              .then((res) => res.error && this.setState(() => ({ error: handleError(res.error) })));
+              .then((res) => {
+                if(!res.error){
+                  form.reset();
+                  this.props.onHide();
+                }
+                
+                res.error && this.setState(() => ({ error: handleError(res.error) }));
+              })
+              .catch((err) => {
+                this.setState(() => ({ error: handleError(err) }))});
           }
         })
         .catch((err) => this.setState(() => ({ error: handleError(err) })));
@@ -74,7 +86,7 @@ class AddUserModal extends Component {
       .then((res) => {
         if (res.data) {
           res.data.sort((a, b) => (a.title <= b.title ? -1 : 1));
-          this.setState(() => ({ roles: res.data }));
+          this.setState(() => ({ roles: res.data, error: '' }));
         }
 
         if (res.error) {
@@ -92,7 +104,7 @@ class AddUserModal extends Component {
         </Modal.Header>
         <Modal.Body>
           <Error message={this.state.error} />
-          <Form onSubmit={this.addUser}>
+          <Form onSubmit={this.registerUser}>
             <Form.Row>
               <Form.Group as={Col} controlId="firstname">
                 <Form.Label>First Name</Form.Label>
@@ -153,7 +165,7 @@ class AddUserModal extends Component {
 }
 
 function mapStateToProps(state) {
-  return { };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,4 +1,12 @@
 .dashboard {
+  @include e(table) {
+    background-color: #fff;
+  }
+
+  @include e(nav) {
+    margin: 15px 0;
+  }
+
   @include e(row) {
     margin: 0;
   }

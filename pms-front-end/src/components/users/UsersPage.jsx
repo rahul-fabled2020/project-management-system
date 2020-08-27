@@ -16,6 +16,7 @@ class UsersPage extends Component {
   state = { error: '', showModal: false };
 
   componentDidMount() {
+    this.props.storeUsers([]);
     const token = CookieManager.getCookie('token');
 
     http.get('/users', token).then((res) => {
@@ -39,7 +40,7 @@ class UsersPage extends Component {
     return (
       <div className="container">
         <Error message={this.state.error} />
-        <nav aria-label="breadcrumb">
+        <nav aria-label="breadcrumb dashboard__nav">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
               <NavLink to="/" activeClassName="active" exact={true}>
@@ -57,7 +58,7 @@ class UsersPage extends Component {
           </button>
         </nav>
 
-        <Table responsive style={{ backgroundColor: 'white' }}>
+        <Table responsive className="dashboard__table">
           <thead>
             <tr>
               <th>#</th>
@@ -82,13 +83,13 @@ class UsersPage extends Component {
                 <td>{user.email}</td>
                 <td>{user.role}</td>
                 <td>
-                  <Link to="/">
+                  <Link to={`/users/${user.id}`}>
                     <i className="fas fa-eye"></i>
                   </Link>
-                  <Link to="/">
+                  <Link to={`/users/${user.id}/edit`}>
                     <i className="fas fa-edit"></i>
                   </Link>
-                  <Link to="/">
+                  <Link to={`/users/${user.id}`}>
                     <i className="fas fa-trash-alt"></i>
                   </Link>
                 </td>
