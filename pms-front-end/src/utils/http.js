@@ -14,7 +14,7 @@ function post(url, data, token) {
     cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: token
+      'Authorization': token
     },
     body: JSON.stringify(data)
   }).then((res) => res.json());
