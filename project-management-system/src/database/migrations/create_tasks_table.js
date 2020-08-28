@@ -25,7 +25,7 @@ export function up(client) {
         REFERENCES users(id),          
       CONSTRAINT fk_project_id_${TABLE.tasks}
       FOREIGN KEY(project_id)
-        REFERENCES projects(id)                
+        REFERENCES projects(id) ON DELETE CASCADE               
   );
   `;
 

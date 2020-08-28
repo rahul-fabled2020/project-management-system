@@ -15,7 +15,7 @@ export function up(client) {
       PRIMARY KEY(user_id, role_id),
       CONSTRAINT fk_user_id_${TABLE.users_roles}
         FOREIGN KEY(user_id)
-          REFERENCES users(id),
+          REFERENCES users(id) ON DELETE CASCADE,
       CONSTRAINT fk_role_id_${TABLE.users_roles}
       FOREIGN KEY(role_id)
         REFERENCES roles(id)                

@@ -15,10 +15,10 @@ export function up(client) {
       PRIMARY KEY(user_id, project_id),
       CONSTRAINT fk_user_id_${TABLE.users_projects}
         FOREIGN KEY(user_id)
-          REFERENCES users(id),
+          REFERENCES users(id) ON DELETE CASCADE,
       CONSTRAINT fk_project_id_${TABLE.users_projects}
       FOREIGN KEY(project_id)
-        REFERENCES projects(id)                
+        REFERENCES projects(id) ON DELETE CASCADE               
   );
   `;
 
