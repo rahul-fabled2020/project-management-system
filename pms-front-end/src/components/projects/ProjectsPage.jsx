@@ -22,12 +22,12 @@ class ProjectsPage extends Component {
       http
         .destroy(`/projects/${id}`, token)
         .then((res) => res)
+        .then(() => this.fetchProjects())
         .catch((err) => handleError(err));
     }
   };
 
-  componentDidMount() {
-    this.props.storeProjects([]);
+  fetchProjects = () => {
     const token = CookieManager.getCookie('token');
     const user = JSON.parse(CookieManager.getCookie('user'));
     const url =
@@ -49,6 +49,11 @@ class ProjectsPage extends Component {
         }
       })
       .catch((err) => this.setState({ error: handleError(err) }));
+  };
+
+  componentDidMount() {
+    this.props.storeProjects([]);
+    this.fetchProjects();
   }
 
   render() {

@@ -13,22 +13,23 @@ class Project extends Component {
   state = { project: { tasks: [] }, assignedUsers: [], loading: false, error: '', showModal: false };
 
   addTask = (task) => {
-    this.setState(()=>({project: {tasks: [task, ...this.state.project.tasks]}}))
-  }
+    this.setState(() => ({ project: { tasks: [task, ...this.state.project.tasks] } }));
+  };
 
   onDelete = (id) => {
     if (window.confirm('Are you sure to delete?')) {
       const token = CookieManager.getCookie('token');
       http
         .destroy(`/tasks/${id}`, token)
-        .then((res) => {if(res && res.error) handleError(res.error)})
+        .then((res) => {
+          if (res && res.error) handleError(res.error);
+        })
+        .then(() => this.fetchTasks(token))
         .catch((err) => handleError(err));
     }
   };
 
-  componentDidMount() {
-    const token = CookieManager.getCookie('token');
-
+  fetchTasks = (token) => {
     http
       .get(`/projects/${this.props.match.params.id}`, token)
       .then((res) => {
@@ -42,6 +43,12 @@ class Project extends Component {
         }
       })
       .catch((err) => this.setState(() => ({ error: handleError(err) })));
+  };
+
+  componentDidMount() {
+    const token = CookieManager.getCookie('token');
+
+    this.fetchTasks(token);
 
     http.get(`/projects/${this.props.match.params.id}/users`, token).then((res) => {
       if (res.data) {

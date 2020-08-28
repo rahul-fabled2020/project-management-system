@@ -22,12 +22,12 @@ class TasksPage extends Component {
       http
         .destroy(`/tasks/${id}`, token)
         .then((res) => res)
+        .then(() => this.fetchTasks())
         .catch((err) => handleError(err));
     }
   };
 
-  componentDidMount() {
-    this.props.storeTasks([]);
+  fetchTasks = () => {
     const token = CookieManager.getCookie('token');
     const user = JSON.parse(CookieManager.getCookie('user'));
     const url =
@@ -49,6 +49,11 @@ class TasksPage extends Component {
         }
       })
       .catch((err) => this.setState({ error: handleError(err) }));
+  };
+
+  componentDidMount() {
+    this.props.storeTasks([]);
+    this.fetchTasks();
   }
 
   render() {
