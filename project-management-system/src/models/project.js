@@ -27,6 +27,20 @@ class Project extends Model {
     return TABLE_NAME;
   }
 
+  /**
+   * Fetches all the users with their roles
+   */
+  all = () => {
+    const sql = `
+    SELECT p.*, u.firstname||' '||u.lastname "manager"
+    FROM ${TABLE.projects} p
+    LEFT JOIN ${TABLE.users} u
+      ON u.id = p.manager_id
+    `;
+
+    return this.queryDatabase(sql);
+  };
+
   getManager = (id) => {
     const sql = `
       SELECT u.* 

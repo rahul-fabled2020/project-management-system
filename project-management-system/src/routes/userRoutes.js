@@ -17,6 +17,11 @@ router.get('/', hasPrivilege('access_users'), userController.fetchAll);
 router.get('/managers', hasPrivilege('access_users'), userController.fetchAllManagers);
 
 /**
+ * GET /api/users/nonmanagers
+ */
+router.get('/nonmanagers', hasPrivilege('access_project'), userController.fetchAllNonManagers);
+
+/**
  * GET /api/users/:id
  */
 router.get('/:id', hasPrivilege('access_user'), userController.fetchById);
@@ -25,6 +30,11 @@ router.get('/:id', hasPrivilege('access_user'), userController.fetchById);
  * GET /api/users/:id/roles
  */
 router.get('/:id/roles', hasPrivilege('access_user'), userController.fetchRolesByUser);
+
+/**
+ * GET /api/users/:id/projects
+ */
+router.get('/:id/projects', hasPrivilege('access_project'), userController.fetchProjectsByUser);
 
 /**
  * POST /api/users

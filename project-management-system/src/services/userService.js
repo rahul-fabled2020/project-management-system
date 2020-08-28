@@ -132,6 +132,16 @@ export function getPrivilegesByUser(id) {
 }
 
 /**
+ * Fetch projects of a particular user
+ * @param {number} id User id
+ * @returns {Promise}
+ */
+export function getProjectsByUser(id) {
+  return user.getProjects(id).then((res) => res.rows);
+}
+
+
+/**
  * Assign roles to particular user
  * @param {number} id User id
  * @param {Array} roleIds Array of role_id
@@ -148,6 +158,15 @@ export function syncRolesByUser(id, roleIds) {
 export function getAllManagers() {
   return user.getAllManagers().then((res) => res.rows);
 }
+
+/**
+ * Fetch all the users who are not managers/admin
+ * @returns {Promise}
+ */
+export function getAllNonManagers() {
+  return user.getAllNonManagers().then((res) => res.rows);
+}
+
 
 /**
  * Return particular user if the user is manager

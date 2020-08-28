@@ -126,5 +126,6 @@ export function getUsersByProject(id) {
  * @param {Array} userIds Array of user_id
  */
 export function syncUsersByProject(id, userIds) {
-  return project.syncUsers(id, JSON.parse(userIds));
+  const Ids = typeof userIds==='string'? JSON.parse(userIds): userIds;
+  return project.syncUsers(id, Ids);
 }

@@ -70,7 +70,6 @@ class User extends Model {
    * @returns {Promise}
    */
   syncRoles = (id, roleIds) => {
-    
     const sql = `
     DO $$
       BEGIN
@@ -104,6 +103,25 @@ class User extends Model {
 
     return this.queryDatabase(sql);
   };
+ 
+  /**
+   * Returns users who are not managers and admin, i.e. has role_id = 1 or role_id = 2
+   * @returns {Promise}
+   */
+  getAllNonManagers = () => {
+    const sql = `
+    SELECT u.*
+    FROM ${TABLE.users} u
+    JOIN ${TABLE.users_roles} ur
+      ON u.id = ur.user_id
+    JOIN ${TABLE.roles} r
+      ON r.id = ur.role_id
+    WHERE r.id NOT IN (1, 2);
+    `;
+
+    return this.queryDatabase(sql);
+  };
+  
 
   /**
    * Returns the user if the user has role Project Manager, i.e. role_id = 2
@@ -141,6 +159,27 @@ class User extends Model {
       ON r.id = rp.role_id
     JOIN ${TABLE.privileges} p
       ON p.id = rp.privilege_id
+    WHERE u.id=${id};
+  `;
+
+    return this.queryDatabase(sql);
+  };
+
+  /**
+   * Fetch projects of a particular user
+   * @param {number} id User id
+   * @returns {Promise}
+   */
+  getProjects = (id) => {
+    const sql = `
+    SELECT p.*, m.firstname||' '||m.lastname "manager"
+    FROM ${TABLE.users} u
+    JOIN ${TABLE.users_projects} up
+      ON u.id = up.user_id
+    JOIN ${TABLE.projects} p
+      ON p.id = up.project_id
+    LEFT JOIN ${TABLE.users} m
+      ON m.id = p.manager_id
     WHERE u.id=${id};
   `;
 

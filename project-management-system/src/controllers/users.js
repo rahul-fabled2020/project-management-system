@@ -87,6 +87,20 @@ export function fetchRolesByUser(req, res, next) {
 }
 
 /**
+ * Fetch projects of a user.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export function fetchProjectsByUser(req, res, next) {
+  userService
+    .getProjectsByUser(req.params.id)
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
+}
+
+/**
  * Assign roles to a user.
  *
  * @param {Object} req
@@ -110,6 +124,20 @@ export function syncRolesByUser(req, res, next) {
 export function fetchAllManagers(req, res, next) {
   userService
     .getAllManagers()
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
+}
+
+/**
+ * Fetch users who are managers.
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ */
+export function fetchAllNonManagers(req, res, next) {
+  userService
+    .getAllNonManagers()
     .then((data) => res.json({ data }))
     .catch((err) => next(err));
 }

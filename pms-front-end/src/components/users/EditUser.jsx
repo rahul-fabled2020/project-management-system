@@ -22,7 +22,6 @@ class EditUser extends Component {
     
     const roleDom = document.getElementById('role');
     const role = parseInt(roleDom.value);
-    const roleTitle = roleDom.options.item(roleDom.selectedIndex).text;
 
     http
     .put(`/users/${this.state.user.id}`, { firstname, lastname, email }, token)
