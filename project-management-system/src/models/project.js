@@ -59,10 +59,12 @@ class Project extends Model {
    */
   getTasks = (id) => {
     const sql = `
-      SELECT t.* 
+      SELECT t.*, u.firstname||' '||u.lastname "assignee" 
       FROM ${TABLE.projects} p
       JOIN ${TABLE.tasks} t
         ON p.id = t.project_id
+      LEFT JOIN users u
+        ON u.id = t.assignee_id
       WHERE p.id = ${id}`;
 
     return this.queryDatabase(sql);

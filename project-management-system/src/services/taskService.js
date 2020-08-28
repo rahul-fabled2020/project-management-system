@@ -22,7 +22,10 @@ export function getTask(id) {
   return task.find(id).then((res) => {
     if (res.rows.length === 0) throw Boom.notFound("The task doesn't exist.");
 
-    return res.rows[0];
+    return Promise.all([
+      getCommentsByTask(id),
+      getAssigneeByTask(id),
+    ]).then(([comments, assignee]) => ({ ...res.rows[0], comments, assignee }));
   });
 }
 

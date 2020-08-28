@@ -106,7 +106,7 @@ class EditUser extends Component {
             </li>
             <li className="breadcrumb-item">
               <NavLink to={`/users/${this.state.user.id}/edit`} activeClassName="active">
-                View User
+                Edit User
               </NavLink>
             </li>
           </ol>

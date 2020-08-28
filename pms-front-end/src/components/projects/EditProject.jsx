@@ -143,7 +143,7 @@ class EditProject extends Component {
             </li>
             <li className="breadcrumb-item">
               <NavLink to={`/projects/${this.state.project.id}/edit`} activeClassName="active">
-                View Project
+                Edit Project
               </NavLink>
             </li>
           </ol>

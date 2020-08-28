@@ -9,6 +9,7 @@ const schema = Joi.object({
   description: Joi.string().max(1000),
   deadline: Joi.date().required(),
   assignee_id: Joi.number(),
+  previous_assignee_id: Joi.number(),
   project_id: Joi.number().required()
 });
 

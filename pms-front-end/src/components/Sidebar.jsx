@@ -13,7 +13,6 @@ const Side = (props) => {
       <NavLink to="/" activeClassName="active" exact={true}>Home</NavLink>
       <NavLink to="/users" activeClassName="active">Users</NavLink>
       <NavLink to="/projects" activeClassName="active">Projects</NavLink>
-      <NavLink to="/tasks" activeClassName="active">Tasks</NavLink>
     </div>
   );
 };

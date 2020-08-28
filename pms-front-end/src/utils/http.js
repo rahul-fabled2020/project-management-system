@@ -45,6 +45,12 @@ function destroy(url, token) {
       'Content-Type': 'application/json',
       Authorization: token
     }
+  }).then((res) => {
+    if (res.status === 204 || res.code === 204) {
+      return {};
+    }
+
+    return res.json();
   });
 }
 
