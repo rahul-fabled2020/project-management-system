@@ -6,8 +6,7 @@ import { Form, Button, Card } from 'react-bootstrap';
 import handleError from '../../utils/handleError';
 import Error from '../Error';
 import { NavLink } from 'react-router-dom';
-import { ROLES } from '../../configs/constants';
-import Select from 'react-select';
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -80,7 +79,6 @@ class EditTask extends Component {
 
   componentDidMount() {
     const token = CookieManager.getCookie('token');
-    const user = JSON.parse(CookieManager.getCookie('user'));
     const taskId = parseInt(this.props.match.params.id);
     const projectId = parseInt(this.props.match.params.projectId);
 

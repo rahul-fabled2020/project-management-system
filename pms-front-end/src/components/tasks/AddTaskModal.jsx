@@ -5,8 +5,6 @@ import CookieManager from '../../utils/cookie';
 import http from '../../utils/http';
 import Error from '../Error';
 import handleError from '../../utils/handleError';
-import { connect } from 'react-redux';
-import * as apiActions from '../../redux/actions/apiActions';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 

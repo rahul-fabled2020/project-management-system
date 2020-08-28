@@ -10,7 +10,6 @@ import EditUser from '../components/users/EditUser';
 import ProjectsPage from '../components/projects/ProjectsPage';
 import EditProject from '../components/projects/EditProject';
 import Project from '../components/projects/Project';
-import TasksPage from '../components/tasks/TasksPage';
 import Task from '../components/tasks/Task';
 import EditTask from '../components/tasks/EditTask';
 

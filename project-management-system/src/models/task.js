@@ -36,10 +36,12 @@ class Task extends Model {
    */
   getComments = (id) => {
     const sql = `
-      SELECT c.* 
+      SELECT c.*, u.firstname||' '||u.lastname "commenter" 
       FROM ${TABLE.comments} c
       JOIN ${TABLE.tasks} t
         ON t.id = c.task_id
+      LEFT JOIN ${TABLE.users} u
+        ON u.id = c.commenter_id
       WHERE t.id = ${id}`;
 
     return this.queryDatabase(sql);
