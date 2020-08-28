@@ -17,14 +17,18 @@ class UsersPage extends Component {
 
   onDelete = (id) => {
     if (window.confirm('Are you sure to delete?')) {
-      alert(id);
+      const token = CookieManager.getCookie('token');
+      http
+        .destroy(`/users/${id}`, token)
+        .then((res) => {if(res && res.error) handleError(res.error)})
+        .then(()=>{
+          this.fetchUsers(token);
+        })
+        .catch((err) => handleError(err));
     }
   };
 
-  componentDidMount() {
-    this.props.storeUsers([]);
-    const token = CookieManager.getCookie('token');
-
+  fetchUsers = (token) => {
     http
       .get('/users', token)
       .then((res) => {
@@ -40,6 +44,14 @@ class UsersPage extends Component {
         }
       })
       .catch((err) => this.setState({ error: handleError(err) }));
+  }
+
+  componentDidMount() {
+    this.props.storeUsers([]);
+    const token = CookieManager.getCookie('token');
+
+    this.fetchUsers(token);
+
   }
 
   render() {
