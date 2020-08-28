@@ -2,6 +2,7 @@ import Boom from '@hapi/boom';
 
 import * as userService from '../services/userService';
 import * as taskService from '../services/taskService';
+import * as commentService from '../services/commentService';
 import * as projectService from '../services/projectService';
 
 /**
@@ -40,19 +41,27 @@ export default function hasPrivilege(privilege) {
             });
 
             break;
-            
+
           case 'update_tasks': //Engineer
             const taskId = req.params.id;
-            
-            if(req.user.roles[0].title === 'Engineer') {
-              taskService.getAssigneeByTask(taskId)
-              .then(assignee => {
-                if(assignee && assignee.id === req.user.id) return next();
+
+            if (req.user.roles[0].title === 'Engineer') {
+              taskService.getAssigneeByTask(taskId).then((assignee) => {
+                if (assignee && assignee.id === req.user.id) return next();
                 return next(Boom.unauthorized('You are not allowed to update other tasks.'));
-              })
+              });
             }
-            
+
             next();
+            break;
+
+          case 'delete_comments':
+            const commentId = req.params.id;
+
+            commentService.getComment(commentId).then((comment) => {
+              if (comment && comment.commenter_id === req.user.id) return next();
+              else next(Boom.unauthorized('You are not allowed to delete other comments'));
+            });
             break;
           default:
             next();
