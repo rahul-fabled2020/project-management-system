@@ -15,7 +15,7 @@ class Task extends Component {
     const user = JSON.parse(CookieManager.getCookie('user'));
 
     comment.commenter = user.firstname+' '+user.lastname;
-    this.setState(()=>({comments: [comment, ...this.state.comments]}));
+    this.setState(()=>({comments: [...this.state.comments, comment ]}));
   };
 
   onDelete = (id) => {
