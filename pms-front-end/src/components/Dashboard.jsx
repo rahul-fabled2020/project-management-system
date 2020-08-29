@@ -9,8 +9,8 @@ const Dash = (props) => {
   return (
     <div className="dashboard">
       <Sidebar visible={visible} setVisible={setVisible} />
-      <div className="dashboard__content">
-        <Header />
+      <div className="dashboard__content" style={!visible ? {'margin-left': '0px'} : {'margin-left': '250px'}}>
+        <Header setSidebarVisible={setVisible} />
         {props.children}
       </div>
     </div>

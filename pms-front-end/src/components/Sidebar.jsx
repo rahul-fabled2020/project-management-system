@@ -6,9 +6,9 @@ const Side = (props) => {
   return (
     <div className="sidebar" style={props.visible ? { width: '250px' } : { width: '0' }}>
       <h1 className="sidebar__heading">PMS-Dashboard</h1>
-      {/* <span className="closebtn" onClick={() => props.setVisible(false)}>
+      <span className="closebtn" onClick={() => props.setVisible(false)}>
         ×
-      </span> */}
+      </span>
 
       <NavLink to="/" activeClassName="active" exact={true}>Home</NavLink>
       <NavLink to="/users" activeClassName="active">Users</NavLink>

@@ -53,5 +53,9 @@
     background-color: $athens-gray;
     min-height: 100vh;
     margin-left: 250px;
+    -webkit-transition: margin 0.25s ease-in;
+    -moz-transition: margin 0.25s ease-in;
+    -o-transition: margin 0.25s ease-in;
+    transition: margin 0.25s ease-in;
   }
 }

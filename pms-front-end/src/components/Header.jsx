@@ -17,6 +17,7 @@ const Header = (props) => {
     <div className="header">
       <div className="container">
         <h1 className="header__heading">
+        <i class="fas fa-hamburger mr-2" onClick={()=>props.setSidebarVisible(true)} style={{cursor: 'pointer'}} title="Show Sidebar"></i>
           <Link to="/" className="header__link">
             Project Management System
           </Link>
