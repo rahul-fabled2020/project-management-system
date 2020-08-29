@@ -5,7 +5,12 @@ import CookieManager from '../utils/cookie';
 import { Link, withRouter } from 'react-router-dom';
 
 const Header = (props) => {
-  const user = JSON.parse(CookieManager.getCookie('user'));
+  let user;
+  try {
+  user = JSON.parse(CookieManager.getCookie('user'));
+  }catch {
+    user = {}
+  }
   const token = CookieManager.getCookie('token');
 
   return (
